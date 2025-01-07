@@ -1,0 +1,9 @@
+
+
+parallelism.default: 3
+  
+pulsar:
+     brokerUrl: 'pulsar://localhost:6650'
+     source:
+        maxFetchRecords: 500
+

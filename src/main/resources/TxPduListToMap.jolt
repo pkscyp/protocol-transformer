@@ -1,0 +1,26 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "ev": {
+          "0": "[&2].ev.ts",
+          "1": "[&2].ev.loc",
+          "2": "[&2].ev.code",
+          "3": "[&2].ev.val1",
+          "4": "[&2].ev.val2",
+          "5": "[&2].ev.val3"
+        },
+        "bcnEv": {
+          "0": "[&2].bcnEv.ts",
+          "1": "[&2].bcnEv.loc",
+          "2": "[&2].bcnEv.code",
+          "3": "[&2].bcnEv.bcnid",
+          "4": "[&2].bcnEv.val1",
+          "5": "[&2].bcnEv.val2"
+        },
+        "*": "[].&"
+      }
+    }
+  }
+]
