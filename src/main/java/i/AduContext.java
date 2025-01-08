@@ -30,7 +30,15 @@ public class AduContext implements Serializable {
 		this.asset_type=pctx.asset_type;
 		this.ads = new LinkedList<Map<String,Object>>();
 	}
-
+	public AduContext(String bid) {
+		this.bid=bid;
+		this.imei=null;
+		this.asset_type=null;
+		this.ads = new LinkedList<Map<String,Object>>();
+	}
+	public void clearAds() {
+		this.ads.clear();
+	}
 	public GpsLocation createGpsLocation(Integer ts) {
 		GpsLocation l = new GpsLocation(bid,ts,"GpsLocation");
 		return l;

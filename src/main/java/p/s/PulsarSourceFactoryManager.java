@@ -31,6 +31,9 @@ public class PulsarSourceFactoryManager<T> implements Serializable {
 		final UUID objId;
 		private static AtomicInteger instanceId=new AtomicInteger(0);
 		private static Map<String,Object> registry=new ConcurrentHashMap<>();
+		private static long start_time=Long.MAX_VALUE;
+		private static long end_time=Long.MIN_VALUE;
+		
 		private final PulsarSourceConfigBuilder conf;
 		
 		public PulsarSourceFactoryManager(BiFunction<Message<String>, Integer, T> converter, Class<T> _class, PulsarSourceConfigBuilder conf) {
@@ -98,6 +101,14 @@ public class PulsarSourceFactoryManager<T> implements Serializable {
 		public PulsarSourceConfigBuilder getConfiguration() {
 			// TODO Auto-generated method stub
 			return conf;
+		}
+		
+		public void logTime(long time) {
+			start_time = Math.min(time, start_time);
+			end_time=Math.max(time,end_time);
+		}
+		public void reportPerformance() {
+			logger.info("Total Exceution time {}",(end_time-start_time));
 		}
 
 }

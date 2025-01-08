@@ -6,6 +6,8 @@ import org.apache.flink.util.Collector;
 import i.AduBundleContext;
 import pipeline.messages.AduMessage;
 
+import com.alibaba.fastjson2.JSON;
+
 public class FnFlatMapAduContext extends RichFlatMapFunction<AduBundleContext,AduMessage>{
 
 	/**
@@ -28,7 +30,7 @@ public class FnFlatMapAduContext extends RichFlatMapFunction<AduBundleContext,Ad
 				AduMessage m = new AduMessage(ctx)
 						.setMaxAduInBundle(maxAdus)
 						.addTopics("persistent://public/default/adus")
-						.setPayload(ctx.mapper.writeValueAsString(ctx.ads.get(i)));
+						.setPayload(JSON.toJSONString(ctx.ads.get(i)));
 				out.collect(m);
 				
 			}

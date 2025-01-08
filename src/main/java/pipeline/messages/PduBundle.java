@@ -8,8 +8,9 @@ public class PduBundle extends BaseMessage<PduBundle>{
 	private static final long serialVersionUID = 1L;
 	String payload;
 	
+	
 	public PduBundle() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public String getPayload() {

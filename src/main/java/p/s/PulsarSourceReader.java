@@ -108,6 +108,7 @@ public class PulsarSourceReader<T> implements SourceReader<T, NoSplit>,ReaderMes
 					consumer.acknowledge(mid);
 					logger.debug("Received event for myId={} pulsarId={}",myId,mid.toString());
 					msgackTracker.getAndDecrement();
+					this.factory.logTime(System.currentTimeMillis());
 				} catch (PulsarClientException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -121,6 +122,7 @@ public class PulsarSourceReader<T> implements SourceReader<T, NoSplit>,ReaderMes
 					
 						Message<String> m = consumer.receive(10, TimeUnit.MILLISECONDS);
 						if(m==null) break;
+						this.factory.logTime(System.currentTimeMillis());
 						queue.offer(m);
 						m.release();
 						logger.debug("{} Loaded {}",myId, m.getMessageId());

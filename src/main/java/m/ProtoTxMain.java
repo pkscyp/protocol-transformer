@@ -45,8 +45,9 @@ public class ProtoTxMain {
 		final PulsarSource<PduBundle> source  = new PulsarSource<PduBundle>(factory);
 		env.fromSource(source, WatermarkStrategy.noWatermarks(), "Pulsar Key Shared Reader")
 			.keyBy(x -> x.getMessageKey())
-			.map( new FnBundleContext())
-			.map( new FnPduToAduContext())
+		//	.map( new FnBundleContext())
+		//	.map( new FnPduToAduContext())
+			.map( new FnPduBundleToAduContext())
 			.flatMap(new FnFlatMapAduContext())
 			.map(new FnPushToPulsar<AduMessage>(new AduMessageToPulsarMessage(), pb))
 			.map(new FnAckDispatcher(factory))
@@ -54,7 +55,7 @@ public class ProtoTxMain {
 		try {
 			
 			env.execute("Pulsar KeyShared Source");
-			
+			factory.reportPerformance();
 			
 		} catch (Exception e) {
 			logger.error("E",e);
