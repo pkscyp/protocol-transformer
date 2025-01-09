@@ -1,5 +1,6 @@
 package rest;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -64,12 +65,12 @@ public class PduToAduTx   {
 				}else {
 					valueMap = jspdu.getJSONObject(pdu_name);
 				}
-				//aduContext.clearAds();
 				JSTransformerHelper.with().invokeFunction(pdu_name, valueMap,aduContext);
 				result.addAll(aduContext.getAds());
 			}
+
 		}
-		//Log.info(result.toString());
+		
 		 resp.code(200).json(result).done();
 	}
 

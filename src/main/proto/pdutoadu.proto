@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package pdutx;
+
+option java_package = "pdutx";
+option java_multiple_files = true;
+
+service TxService {
+  rpc TxPdu (TxPduRequest) returns (TxPduResponse); 
+}
+
+message TxPduRequest {
+  string msgId =1;
+  string PduBundleJson = 2;
+}
+
+message TxPduResponse {
+  string AdusListJson=1;
+}
+
